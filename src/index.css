@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #F4F2EC;
+  --color-panel: #EAE6DC;
+  --color-ink: #141716;
+  --color-secondary: #525855;
+  --color-hairline: #CFCAC0;
+  --color-crimson: #B81D24;
+  --color-state-blue: #1D5B8C;
+  --color-state-amber: #C88A1E;
+  --color-state-red: #B81D24;
+  --color-state-darkred: #6E0E14;
+  --color-dark-surface: #0F1B1C;
+  --color-dark-border: #263638;
+  --color-dark-muted: #A6B4B2;
+
+  --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-hindi: "Noto Sans Devanagari", "IBM Plex Sans", sans-serif;
+}
+
+@layer base {
+  html {
+    background-color: #F4F2EC;
+    color: #141716;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    background-color: #F4F2EC;
+    color: #141716;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid #141716;
+    outline-offset: 2px;
+  }
+
+  .dark-section :focus-visible {
+    outline-color: #F4F2EC;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom hairline range input — sharp, flat, accessible */
+input[type="range"].spec-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].spec-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  background: #CFCAC0;
+  border-radius: 0;
+}
+
+input[type="range"].spec-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 28px;
+  margin-top: -13px;
+  background: #141716;
+  border: 1px solid #141716;
+  border-radius: 0;
+  transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input[type="range"].spec-slider:hover::-webkit-slider-thumb,
+input[type="range"].spec-slider:focus-visible::-webkit-slider-thumb {
+  background: #B81D24;
+  border-color: #B81D24;
+}
+
+input[type="range"].spec-slider::-moz-range-track {
+  width: 100%;
+  height: 2px;
+  background: #CFCAC0;
+  border-radius: 0;
+}
+
+input[type="range"].spec-slider::-moz-range-thumb {
+  width: 16px;
+  height: 28px;
+  background: #141716;
+  border: 1px solid #141716;
+  border-radius: 0;
+  transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll reveal & TRIVENI line animation */
+.reveal-block {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-block[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.triveni-path {
+  stroke-dasharray: 560;
+  stroke-dashoffset: 560;
+  transition: stroke-dashoffset 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.triveni-path[data-drawn="true"] {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-block {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .triveni-path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}

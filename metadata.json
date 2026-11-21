@@ -1,0 +1,6 @@
+{
+  "name": "AuraPPH",
+  "description": "Pre-release specification and interactive prototype simulator for AuraPPH — an offline, zero-AI Android tool estimating postpartum haemorrhage blood loss via the deterministic TRIVENI method.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
