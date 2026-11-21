@@ -5,7 +5,7 @@
 AuraPPH is a free, fully offline Android app in development that estimates postpartum haemorrhage (PPH) blood loss from a photo of a used maternity pad — for nurses and ASHA/ANM workers in low-resource settings. This repo is its project website: the problem, the method, the validation plan, an interactive prototype simulator, and (after validation) the APK download.
 
 Built for **Health Hackathon 3.0 — VIT Bhopal × Johns Hopkins University, Jan 27–29, 2027**.
-Team: Shagun (Lead) · Dhyey Patel · Kislay Kumar · Snehil Sahay · Kartikey Singh
+Team: Shagun · Kislay Kumar · Snehil Sahay · Kartikey Singh (Lead) · Dhyey Patel
 
 ## The method — TRIVENI
 

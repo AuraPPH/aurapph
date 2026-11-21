@@ -5,11 +5,11 @@ interface DownloadAndTeamProps {
 }
 
 const TEAM_MEMBERS = [
-  { initials: 'SH', name: 'Shagun', role: 'Team Lead' },
-  { initials: 'DP', name: 'Dhyey Patel', role: 'Systems & Validation' },
+  { initials: 'SH', name: 'Shagun', role: 'Team Member' },
   { initials: 'KK', name: 'Kislay Kumar', role: 'Team Member' },
   { initials: 'SS', name: 'Snehil Sahay', role: 'Team Member' },
-  { initials: 'KS', name: 'Kartikey Singh', role: 'Team Member' },
+  { initials: 'KS', name: 'Kartikey Singh', role: 'Team Lead' },
+  { initials: 'DP', name: 'Dhyey Patel', role: 'Systems & Validation' },
 ];
 
 const APK_SPECS = [
