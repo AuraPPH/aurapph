@@ -297,15 +297,48 @@ export default function App() {
                 Three steps at the bedside.
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-[1fr_400px] gap-8 items-start mb-10">
-                <p className="text-[15px] text-[#525855] leading-relaxed max-w-[52ch]">
-                  The full flow, start to finish: lay the pad beside the card, capture the
-                  flash / no-flash pair, and read the range, the state and the next action.
-                  Eighty seconds, exactly as it happens at the bedside — no internet, no
-                  account, nothing leaves the phone.
-                </p>
-                <figure className="w-full max-w-[400px] md:justify-self-end">
-                  <div className="border border-[#141716] bg-[#F4F2EC]">
+              <div className="border border-[#141716] bg-[#F4F2EC] mb-10">
+                <div className="flex items-center justify-between border-b border-[#141716] px-4 py-2.5">
+                  <span className="font-mono text-[11px] font-semibold tracking-[0.14em] uppercase text-[#141716]">
+                    Film — How a reading works
+                  </span>
+                  <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#525855]">
+                    80 sec · 16:9 · Sound on
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_420px]">
+                  <div className="p-6 sm:p-8">
+                    <p className="text-[15px] text-[#525855] leading-relaxed max-w-[52ch]">
+                      The full flow, start to finish: lay the pad beside the card, capture the
+                      flash / no-flash pair, and read the range, the state and the next action —
+                      exactly as it happens at the bedside. No internet, no account, nothing
+                      leaves the phone.
+                    </p>
+                    <div className="mt-8 border-t border-[#CFCAC0]">
+                      <div className="flex items-baseline gap-4 py-3 border-b border-[#CFCAC0]">
+                        <span className="font-mono text-xs font-semibold text-[#B81D24]">0:00</span>
+                        <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#141716] w-24 shrink-0">
+                          Capture
+                        </span>
+                        <span className="text-sm text-[#525855]">Pad + card, flash pair, frame lock</span>
+                      </div>
+                      <div className="flex items-baseline gap-4 py-3 border-b border-[#CFCAC0]">
+                        <span className="font-mono text-xs font-semibold text-[#B81D24]">0:24</span>
+                        <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#141716] w-24 shrink-0">
+                          Triveni
+                        </span>
+                        <span className="text-sm text-[#525855]">Optics · Amount · Clinical Ledger</span>
+                      </div>
+                      <div className="flex items-baseline gap-4 py-3">
+                        <span className="font-mono text-xs font-semibold text-[#B81D24]">0:48</span>
+                        <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#141716] w-24 shrink-0">
+                          Result
+                        </span>
+                        <span className="text-sm text-[#525855]">Range · state · E-MOTIVE checklist</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="md:border-l border-t md:border-t-0 border-[#141716] bg-[#EAE6DC] flex items-center">
                     <video
                       className="w-full aspect-video block"
                       controls
@@ -317,10 +350,7 @@ export default function App() {
                       <source src="/src/assets/how-to-use.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <figcaption className="mt-2 font-mono text-[11px] tracking-[0.14em] uppercase text-[#525855]">
-                    Watch — how a reading works · 80 sec
-                  </figcaption>
-                </figure>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#CFCAC0]">
