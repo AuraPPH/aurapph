@@ -12,6 +12,7 @@ import {
   formatMl,
 } from '../utils/triveni';
 import { Modal } from './Modal';
+import { PadVisual } from './PadVisual';
 
 export const FieldSimulator: React.FC = () => {
   const [trueVolumeMl, setTrueVolumeMl] = useState<number>(430);
@@ -272,6 +273,9 @@ export const FieldSimulator: React.FC = () => {
                   {ILLUSTRATIVE_STAMP}
                 </p>
               </div>
+
+              {/* Interactive Layered Maternity Pad Visual */}
+              <PadVisual volumeMl={trueVolumeMl} lighting={lighting} tilted={tilted} />
 
               {/* Primary Readout: Range + State */}
               <div className="p-5 border-b border-[#CFCAC0]">

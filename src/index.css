@@ -129,6 +129,41 @@ input[type="range"].spec-slider::-moz-range-thumb {
   stroke-dashoffset: 0;
 }
 
+/* PadVisual 3D flip, tilt perspective & smooth blood-stain animation */
+.pad-perspective-stage {
+  perspective: 900px;
+}
+
+.pad-tilt-wrapper {
+  transform-style: preserve-3d;
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pad-flip-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pad-flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.pad-flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
+.pad-stain-animated {
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), opacity 600ms ease;
+}
+
+.pad-stain-color {
+  transition: fill 600ms ease, fill-opacity 600ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-block {
     opacity: 1;
@@ -138,6 +173,12 @@ input[type="range"].spec-slider::-moz-range-thumb {
   .triveni-path {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
+    transition: none;
+  }
+  .pad-tilt-wrapper,
+  .pad-flip-card,
+  .pad-stain-animated,
+  .pad-stain-color {
     transition: none;
   }
 }
