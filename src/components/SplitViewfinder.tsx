@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { ILLUSTRATIVE_STAMP, shouldShowUnderestimationInsight } from '../utils/triveni';
+import { PadFrontSvg } from './padArt';
 
 export const SplitViewfinder: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -147,7 +148,7 @@ export const SplitViewfinder: React.FC = () => {
             preserveAspectRatio="xMidYMid meet"
             className="w-full h-full"
             role="img"
-            aria-label="Abstract flat technical diagram of a maternity pad and calibration card comparing visual estimation against TRIVENI range measurement"
+            aria-label="Realistic maternity pad with calibration card comparing visual estimation against TRIVENI range measurement"
           >
             {/* Technical millimeter measurement grid */}
             <defs>
@@ -157,93 +158,42 @@ export const SplitViewfinder: React.FC = () => {
             </defs>
             <rect x="0" y="0" width="960" height="400" fill="url(#triveni-grid)" />
 
-            {/* Printed Reference Calibration Card (Right side of pad) */}
-            <g transform="translate(725, 118)">
-              <rect x="0" y="0" width="98" height="156" fill="#F4F2EC" stroke="#141716" strokeWidth="1.5" />
-              <rect x="10" y="10" width="24" height="24" fill="#141716" />
-              <rect x="64" y="10" width="24" height="24" fill="#141716" />
-              <rect x="10" y="122" width="24" height="24" fill="#141716" />
-              <rect x="64" y="122" width="24" height="24" fill="#141716" />
-              {/* Greyscale reflectance patches */}
-              <rect x="14" y="46" width="70" height="14" fill="#141716" />
-              <rect x="14" y="64" width="70" height="14" fill="#525855" />
-              <rect x="14" y="82" width="70" height="14" fill="#CFCAC0" />
-              <rect x="14" y="100" width="70" height="14" fill="#F4F2EC" stroke="#141716" strokeWidth="0.75" />
-              <text
-                x="49"
-                y="174"
-                textAnchor="middle"
-                fill="#141716"
-                fontFamily="IBM Plex Mono, monospace"
-                fontSize="10"
-              >
-                REF CARD 50×80mm
-              </text>
-            </g>
-
-            {/* Abstract Flat Maternity Pad Outline */}
-            <g transform="translate(150, 88)">
-              {/* Outer pad perimeter (technical flat contour) */}
-              <path
-                d="M 48 0 L 472 0 L 520 34 L 520 186 L 472 220 L 48 220 L 0 186 L 0 34 Z"
-                fill="#F4F2EC"
-                stroke="#141716"
-                strokeWidth="1.5"
-              />
-              {/* Inner absorbent core stitching */}
-              <rect
-                x="46"
-                y="26"
-                width="428"
-                height="168"
-                fill="none"
-                stroke="#CFCAC0"
-                strokeWidth="1"
-                strokeDasharray="6 4"
-              />
-
-              {/* Flat geometric crimson stain contour — abstract, non-graphic */}
-              <polygon
-                points="116,52 214,34 342,42 426,74 446,126 392,174 286,188 164,178 96,136 92,84"
-                fill="#B81D24"
-                fillOpacity="0.88"
-              />
-              {/* Saturation depth sub-contour (TRIVENI optical depth zone) */}
-              <polygon
-                points="178,72 276,62 356,88 364,136 292,158 192,150 156,112"
-                fill="#6E0E14"
-                fillOpacity="0.65"
-              />
-
+            {/* Realistic maternity pad (shared PadFrontSvg, 615 mL scenario) with its
+                own detailed calibration card; TRIVENI analysis overlay on top */}
+            <PadFrontSvg
+              volumeMl={615}
+              svgAttrs={{ x: 140, y: 74, width: 540, height: 262, className: '' }}
+            />
+            <g>
               {/* TRIVENI segmentation bounding box + crosshairs */}
               <rect
-                x="92"
-                y="34"
-                width="354"
-                height="154"
+                x="160"
+                y="103"
+                width="407"
+                height="204"
                 fill="none"
                 stroke="#141716"
                 strokeWidth="1.25"
                 strokeDasharray="4 3"
               />
               {/* Corner brackets */}
-              <path d="M 92 48 L 92 34 L 106 34" fill="none" stroke="#141716" strokeWidth="2.5" />
-              <path d="M 432 34 L 446 34 L 446 48" fill="none" stroke="#141716" strokeWidth="2.5" />
-              <path d="M 92 174 L 92 188 L 106 188" fill="none" stroke="#141716" strokeWidth="2.5" />
-              <path d="M 432 188 L 446 188 L 446 174" fill="none" stroke="#141716" strokeWidth="2.5" />
+              <path d="M 160 117 L 160 103 L 174 103" fill="none" stroke="#141716" strokeWidth="2.5" />
+              <path d="M 553 103 L 567 103 L 567 117" fill="none" stroke="#141716" strokeWidth="2.5" />
+              <path d="M 160 293 L 160 307 L 174 307" fill="none" stroke="#141716" strokeWidth="2.5" />
+              <path d="M 553 307 L 567 307 L 567 293" fill="none" stroke="#141716" strokeWidth="2.5" />
 
-              {/* Optical sampling points */}
-              <circle cx="268" cy="110" r="5" fill="#F4F2EC" stroke="#141716" strokeWidth="1.5" />
-              <line x1="252" y1="110" x2="284" y2="110" stroke="#141716" strokeWidth="1" />
-              <line x1="268" y1="94" x2="268" y2="126" stroke="#141716" strokeWidth="1" />
+              {/* Optical sampling point at stain centre */}
+              <circle cx="396" cy="205" r="5" fill="#F4F2EC" stroke="#141716" strokeWidth="1.5" />
+              <line x1="380" y1="205" x2="412" y2="205" stroke="#141716" strokeWidth="1" />
+              <line x1="396" y1="189" x2="396" y2="221" stroke="#141716" strokeWidth="1" />
 
               {/* Dimension callout lines */}
-              <line x1="92" y1="240" x2="446" y2="240" stroke="#141716" strokeWidth="1" />
-              <line x1="92" y1="234" x2="92" y2="246" stroke="#141716" strokeWidth="1" />
-              <line x1="446" y1="234" x2="446" y2="246" stroke="#141716" strokeWidth="1" />
+              <line x1="168" y1="348" x2="559" y2="348" stroke="#141716" strokeWidth="1" />
+              <line x1="168" y1="342" x2="168" y2="354" stroke="#141716" strokeWidth="1" />
+              <line x1="559" y1="342" x2="559" y2="354" stroke="#141716" strokeWidth="1" />
               <text
-                x="269"
-                y="256"
+                x="364"
+                y="368"
                 textAnchor="middle"
                 fill="#141716"
                 fontFamily="IBM Plex Mono, monospace"
@@ -284,45 +234,22 @@ export const SplitViewfinder: React.FC = () => {
             {/* Plain surface — no calibration grid */}
             <rect x="0" y="0" width="960" height="410" fill="#EAE6DC" />
 
-            {/* Uncalibrated Reference Card placeholder (faded) */}
-            <g transform="translate(725, 118)" opacity="0.35">
-              <rect x="0" y="0" width="98" height="156" fill="#F4F2EC" stroke="#CFCAC0" strokeWidth="1" />
-            </g>
-
-            {/* Same abstract flat maternity pad without optical overlay */}
-            <g transform="translate(150, 88)">
-              <path
-                d="M 48 0 L 472 0 L 520 34 L 520 186 L 472 220 L 48 220 L 0 186 L 0 34 Z"
-                fill="#F4F2EC"
-                stroke="#CFCAC0"
-                strokeWidth="1.5"
-              />
-              <rect
-                x="46"
-                y="26"
-                width="428"
-                height="168"
-                fill="none"
-                stroke="#CFCAC0"
-                strokeWidth="1"
-              />
-              {/* Flat crimson stain shape without saturation depth callouts */}
-              <polygon
-                points="116,52 214,34 342,42 426,74 446,126 392,174 286,188 164,178 96,136 92,84"
-                fill="#B81D24"
-                fillOpacity="0.82"
-              />
-              <text
-                x="260"
-                y="256"
-                textAnchor="middle"
-                fill="#525855"
-                fontFamily="IBM Plex Mono, monospace"
-                fontSize="11"
-              >
-                UNAIDED EYE — DEPTH & ABSORPTION INVISIBLE
-              </text>
-            </g>
+            {/* Same realistic pad photo — the unaided eye sees the identical
+                stain but has no calibration, depth or absorption reading */}
+            <PadFrontSvg
+              volumeMl={615}
+              svgAttrs={{ x: 140, y: 74, width: 540, height: 262, className: '' }}
+            />
+            <text
+              x="364"
+              y="368"
+              textAnchor="middle"
+              fill="#525855"
+              fontFamily="IBM Plex Mono, monospace"
+              fontSize="11"
+            >
+              UNAIDED EYE — DEPTH & ABSORPTION INVISIBLE
+            </text>
           </svg>
 
           {/* Left side label (sm+ overlay; mobile uses dedicated strip above) */}
