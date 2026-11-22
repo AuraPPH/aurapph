@@ -292,10 +292,36 @@ export default function App() {
               </p>
               <h2
                 id="how-heading"
-                className="font-serif text-3xl sm:text-4xl lg:text-[42px] leading-[1.12] font-normal text-[#141716] mb-10"
+                className="font-serif text-3xl sm:text-4xl lg:text-[42px] leading-[1.12] font-normal text-[#141716] mb-6"
               >
                 Three steps at the bedside.
               </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_400px] gap-8 items-start mb-10">
+                <p className="text-[15px] text-[#525855] leading-relaxed max-w-[52ch]">
+                  The full flow, start to finish: lay the pad beside the card, capture the
+                  flash / no-flash pair, and read the range, the state and the next action.
+                  Eighty seconds, exactly as it happens at the bedside — no internet, no
+                  account, nothing leaves the phone.
+                </p>
+                <figure className="w-full max-w-[400px] md:justify-self-end">
+                  <div className="border border-[#141716] bg-[#F4F2EC]">
+                    <video
+                      className="w-full aspect-video block"
+                      controls
+                      preload="metadata"
+                      playsInline
+                      poster="/src/assets/how-to-use-poster.jpg"
+                      aria-label="How to use AuraPPH — 80 second explainer film"
+                    >
+                      <source src="/src/assets/how-to-use.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <figcaption className="mt-2 font-mono text-[11px] tracking-[0.14em] uppercase text-[#525855]">
+                    Watch — how a reading works · 80 sec
+                  </figcaption>
+                </figure>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#CFCAC0]">
                 {/* Step 1 */}
