@@ -181,6 +181,89 @@ export const TriveniSection: React.FC = () => {
             </p>
           </article>
         </div>
+
+        {/* Open the black box — pipeline + formulas + worked example */}
+        <div className="mt-8 border border-[#141716] bg-[#F4F2EC]">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 py-3 border-b border-[#141716]">
+            <span className="font-mono text-xs font-semibold tracking-[0.12em] uppercase text-[#141716]">
+              Open the black box — the actual pipeline
+            </span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[#B81D24]">
+              Spec v0.1 · Parameters uncalibrated
+            </span>
+          </div>
+
+          {/* Pipeline strip */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-b border-[#CFCAC0]">
+            {[
+              { step: 'STAGE 1', name: 'RAW PAIR', detail: 'Flash + no-flash RAW frames, locked exposure & white balance' },
+              { step: 'STAGE 2', name: 'RECTIFY', detail: 'Card fiducials → homography, mm scale, white-balance normalisation' },
+              { step: 'STAGE 3', name: 'SEGMENT', detail: 'Stain mask, blood-signal index, specular pooling, underside penetration' },
+              { step: 'STAGE 4', name: 'BOUND', detail: 'Area × penetration × pad table → bounded range + state' },
+            ].map((s, i) => (
+              <div
+                key={s.step}
+                className={`p-5 ${i < 3 ? 'lg:border-r' : ''} border-[#CFCAC0] ${i % 2 === 0 ? 'border-r lg:border-r' : ''} ${i < 2 ? 'border-b lg:border-b-0' : ''}`}
+              >
+                <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#525855]">
+                  {s.step}
+                </p>
+                <p className="font-mono text-sm font-semibold tracking-[0.06em] text-[#141716] mt-1">
+                  {s.name} {i < 3 && <span className="text-[#B81D24]">→</span>}
+                </p>
+                <p className="text-[13px] text-[#525855] leading-relaxed mt-1.5">{s.detail}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Formulas */}
+          <div className="px-4 sm:px-6 py-5 border-b border-[#CFCAC0] overflow-x-auto">
+            <div className="font-mono text-[13px] sm:text-sm leading-[2] text-[#141716] whitespace-nowrap">
+              <p>
+                <span className="text-[#525855]">OPTICS&nbsp;&nbsp;</span>
+                BSI = blood-signal index from flash / no-flash channel ratios, read against the
+                card&apos;s clean margin
+              </p>
+              <p>
+                <span className="text-[#525855]">AMOUNT&nbsp;&nbsp;</span>
+                V_range = A_stain (cm²) × penetration class × k_pad ± σ_capture
+              </p>
+              <p>
+                <span className="text-[#525855]">LEDGER&nbsp;&nbsp;</span>
+                session = Σ pad ranges · state = f(cumulative, vitals, deterioration) · escalation
+                sticky
+              </p>
+            </div>
+            <p className="mt-3 text-sm text-[#525855] leading-relaxed">
+              σ_capture is not decoration: dim light adds ±5% half-width, a tilted capture ±6% —
+              poor conditions widen the range instead of borrowing false precision. k_pad comes from
+              the bench calibration table for the selected pad type; until bench calibration runs,
+              every parameter above is a design value, not a measurement.
+            </p>
+          </div>
+
+          {/* Worked example */}
+          <div className="px-4 sm:px-6 py-5 bg-[#EAE6DC]">
+            <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3">
+              One worked example — synthetic, illustrative
+            </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-xs sm:text-[13px] text-[#141716]">
+              <span className="px-2.5 py-1.5 border border-[#141716] bg-[#F4F2EC]">STAIN 212 CM²</span>
+              <span aria-hidden="true">→</span>
+              <span className="px-2.5 py-1.5 border border-[#141716] bg-[#F4F2EC]">PENETRATION: THROUGH</span>
+              <span aria-hidden="true">→</span>
+              <span className="px-2.5 py-1.5 border border-[#141716] bg-[#F4F2EC]">LEDGER + VITALS</span>
+              <span aria-hidden="true">→</span>
+              <span className="px-2.5 py-1.5 bg-[#C88A1E] text-[#141716] font-semibold">
+                550–680 ML · AMBER
+              </span>
+            </div>
+            <p className="mt-3 text-sm text-[#525855] leading-relaxed">
+              The same sample a nurse would eyeball at ≈320 mL. Every intermediate value on this
+              strip is inspectable — that is the whole point of a deterministic method.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -23,7 +23,7 @@ const APK_SPECS = [
 export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast }) => {
   return (
     <>
-      {/* 10 — DOWNLOAD / APK ROADMAP */}
+      {/* 11 — DOWNLOAD / APK ROADMAP */}
       <section
         id="download"
         className="py-16 sm:py-20 border-b border-[#CFCAC0]"
@@ -31,7 +31,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#525855] mb-3">
-            10 — APK ROADMAP
+            11 — APK ROADMAP
           </p>
           <h2
             id="download-heading"
@@ -107,7 +107,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
         </div>
       </section>
 
-      {/* 11 — TEAM */}
+      {/* 12 — TEAM */}
       <section
         id="team"
         className="py-16 sm:py-20 border-b border-[#CFCAC0]"
@@ -115,7 +115,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#525855] mb-3">
-            11 — TEAM
+            12 — TEAM
           </p>
           <h2
             id="team-heading"

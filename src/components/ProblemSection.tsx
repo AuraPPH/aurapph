@@ -109,7 +109,8 @@ export const ProblemSection: React.FC = () => {
               {emotiveVisual}% → {emotiveMeasured}%
             </p>
             <p className="mt-3 text-sm text-[#141716] leading-snug">
-              PPH detection rate, visual estimation vs measured blood loss
+              PPH detection rate — usual care vs the E-MOTIVE intervention (calibrated drape +
+              first-response bundle)
             </p>
             <p className="mt-3 font-mono text-[11px] tracking-[0.06em] uppercase text-[#525855]">
               E-MOTIVE trial, NEJM 2023

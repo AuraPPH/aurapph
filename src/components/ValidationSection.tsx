@@ -33,7 +33,7 @@ export const ValidationSection: React.FC = () => {
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#525855] mb-3">
-          09 — PROOF, IN PROGRESS
+          10 — PROOF, IN PROGRESS
         </p>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div>
@@ -83,6 +83,66 @@ export const ValidationSection: React.FC = () => {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Pre-registered protocol — fixed before data exists */}
+        <div className="mt-8 border border-[#CFCAC0] bg-[#F4F2EC] overflow-x-auto">
+          <div className="px-4 sm:px-6 py-3 border-b border-[#CFCAC0] bg-[#EAE6DC] flex flex-wrap items-center justify-between gap-2">
+            <span className="font-mono text-xs tracking-[0.1em] uppercase text-[#141716]">
+              THE PRE-REGISTERED PROTOCOL — FIXED BEFORE ANY DATA EXISTS
+            </span>
+            <span className="font-mono text-[11px] tracking-[0.08em] uppercase text-[#B81D24]">
+              Status: Fixed · Not yet run
+            </span>
+          </div>
+          <dl className="divide-y divide-[#CFCAC0] min-w-[560px]">
+            {[
+              ['Specimens', 'Synthetic blood simulant first, then goat/sheep blood in the VIT lab only. Maternity cotton pads across locally available brands. Period blood is never used — it is only ~36% blood and does not clot like postpartum loss.'],
+              ['Volumes', '25–250 mL per pad in 25 mL steps, dispensed by volume and confirmed by weight.'],
+              ['Capture matrix', 'Three phones including a 2 GB RAM budget device · daylight and dim room · flat and tilted captures · flash pair on every sample.'],
+              ['Ground truth', 'Gravimetric weighing is primary (soaked minus dry mass). Alkaline hematin assay cross-checks a subset.'],
+              ['Bias controls', 'Blinded operator who never sees the dispensed volume · results split by physical pad, never by photo · leave-one-phone-out analysis · nurse visual estimates recorded as the human baseline.'],
+              ['Pre-registered metrics', 'Sensitivity at true 500 mL — headline target ≥90%. Kill rule, fixed now: below 85%, the word "amount" leaves the pitch. Range coverage and mean absolute error reported alongside.'],
+            ].map(([term, def]) => (
+              <div key={term} className="py-3.5 px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-12 gap-2">
+                <dt className="sm:col-span-3 font-mono text-xs uppercase tracking-[0.06em] text-[#525855]">
+                  {term}
+                </dt>
+                <dd className="sm:col-span-9 text-sm text-[#141716] leading-relaxed">{def}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {/* The calibration card — a physical artifact judges can hold */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 border border-[#141716] bg-[#F4F2EC]">
+          <div className="p-6 sm:p-8">
+            <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-2">
+              THE OTHER HALF OF THE METHOD
+            </p>
+            <h3 className="font-serif text-2xl font-normal text-[#141716] leading-snug">
+              The calibration card is a physical artifact — print it and check us.
+            </h3>
+            <p className="mt-3 text-sm text-[#525855] leading-relaxed">
+              Every measurement stands on this card: corner fiducials for scale, a greyscale ramp
+              for white balance, a true-millimetre ruler to catch print scaling. Print at 100%,
+              laminate matte, and verify the ruler before trusting a single reading.
+            </p>
+            <a
+              href="/src/assets/calibration-card.svg"
+              download="aurapph-calibration-card-v1.svg"
+              className="mt-5 inline-flex min-h-[44px] px-5 items-center border border-[#141716] bg-[#141716] text-[#F4F2EC] hover:bg-[#B81D24] hover:border-[#B81D24] font-mono text-xs font-semibold tracking-[0.08em] uppercase transition-colors"
+            >
+              Download the card (SVG · 100 × 70 mm)
+            </a>
+          </div>
+          <div className="bg-[#EAE6DC] border-t md:border-t-0 md:border-l border-[#141716] flex items-center justify-center p-6">
+            <img
+              src="/src/assets/calibration-card.svg"
+              alt="AuraPPH calibration card v1 — corner fiducials, greyscale ramp and millimetre ruler"
+              className="w-full max-w-[420px] h-auto border border-[#CFCAC0]"
+            />
+          </div>
         </div>
 
         {/* Visibly EMPTY results panel */}

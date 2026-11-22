@@ -20,7 +20,7 @@ export const PrivacySection: React.FC = () => {
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#A6B4B2] mb-3">
-          08 — PRIVACY &amp; ENGINEERING
+          09 — PRIVACY &amp; ENGINEERING
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -77,6 +77,59 @@ export const PrivacySection: React.FC = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* Evidence strip — the claim, shown */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 border border-[#263638]">
+          <div className="p-5 sm:p-6 border-b lg:border-b-0 lg:border-r border-[#263638] bg-[#091213]">
+            <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#A6B4B2] mb-3">
+              MANIFEST EXCERPT — THE PERMISSION THAT ISN&apos;T THERE
+            </p>
+            <pre className="font-mono text-xs sm:text-[13px] leading-relaxed text-[#F4F2EC] overflow-x-auto">
+              <code>
+                {`<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.VIBRATE" />
+`}
+                <span className="line-through text-[#B81D24]">
+                  {'<uses-permission android:name="android.permission.INTERNET" />'}
+                </span>
+                {`
+<!-- absent — removed at build time, tools:node="remove" -->`}
+              </code>
+            </pre>
+            <p className="mt-3 font-mono text-[11px] text-[#A6B4B2]">
+              Full target manifest behind the button above — replaced by the real manifest at APK
+              release.
+            </p>
+          </div>
+          <div className="p-5 sm:p-6">
+            <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#A6B4B2] mb-3">
+              DATA LIFECYCLE — WHERE EVERYTHING GOES
+            </p>
+            <div className="space-y-3 font-mono text-xs sm:text-[13px] leading-relaxed">
+              <p>
+                <span className="text-[#F4F2EC] font-semibold">PHOTO</span>
+                <span className="text-[#A6B4B2]"> → RAM only → </span>
+                <span className="text-[#F4F2EC]">deleted after computation</span>
+              </p>
+              <p>
+                <span className="text-[#F4F2EC] font-semibold">NUMBERS</span>
+                <span className="text-[#A6B4B2]"> → Room ledger → </span>
+                <span className="text-[#F4F2EC]">stay on this phone, deletable anytime</span>
+              </p>
+              <p>
+                <span className="text-[#F4F2EC] font-semibold">NETWORK</span>
+                <span className="text-[#A6B4B2]"> → </span>
+                <span className="text-[#F4F2EC]">nothing. No permission exists to send with.</span>
+              </p>
+            </div>
+            <p className="mt-4 text-sm text-[#EAE6DC] leading-relaxed">
+              Budget-device budget, stated plainly: the full pipeline is designed to run inside a
+              2 GB RAM Android 9 phone — capture buffers are released before the next pad is
+              photographed, and if the flash fails to fire, the capture is rejected (GREY), never
+              guessed.
+            </p>
           </div>
         </div>
       </div>

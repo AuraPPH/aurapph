@@ -3,6 +3,7 @@ import { TopBar } from './components/TopBar';
 import { SplitViewfinder } from './components/SplitViewfinder';
 import { ProblemSection } from './components/ProblemSection';
 import { TriveniSection } from './components/TriveniSection';
+import { ScopeSection } from './components/ScopeSection';
 import { FieldSimulator } from './components/FieldSimulator';
 import { PrivacySection } from './components/PrivacySection';
 import { ValidationSection } from './components/ValidationSection';
@@ -36,8 +37,8 @@ const FIELD_PRINCIPLES = [
   },
   {
     index: '04',
-    title: 'Hindi + English, big touch targets',
-    body: 'Clear Devanagari and English readouts, pre-recorded voice guidance, and ≥48 dp gloved-hand controls.',
+    title: 'Hindi · Gujarati · English, big touch targets',
+    body: 'Clear Devanagari readouts, pre-recorded voice guidance in three languages, and ≥48 dp gloved-hand controls.',
   },
 ];
 
@@ -429,6 +430,9 @@ export default function App() {
         {/* 7. TRIVENI */}
         <TriveniSection />
 
+        {/* 7b. Scope & Limits */}
+        <ScopeSection />
+
         {/* 8. Ninety Minutes */}
         <section
           id="ninety-minutes"
@@ -438,7 +442,7 @@ export default function App() {
           <RevealWrapper>
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
               <p className="font-mono text-xs tracking-[0.14em] uppercase text-[#525855] mb-3">
-                06 — NINETY MINUTES
+                07 — NINETY MINUTES
               </p>
               <h2
                 id="ninety-heading"

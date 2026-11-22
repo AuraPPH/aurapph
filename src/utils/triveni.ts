@@ -155,47 +155,140 @@ export function classifyStateByMidpoint(midpointMl: number): AlertStateId {
   return 'DARK_RED';
 }
 
-/**
- * Computes an illustrative TRIVENI blood-loss range from a simulated true volume
- * and capture conditions. Always returns a range (never a single mL value).
- */
-export function computeSimulation(input: SimulationInput): SimulationResult {
-  const clamped = Math.max(SIMULATOR_MIN_ML, Math.min(SIMULATOR_MAX_ML, input.trueVolumeMl));
+export interface RangeEstimate {
+  lowMl: number;
+  highMl: number;
+  midpointMl: number;
+  spreadPct: number;
+  rangeLabel: string;
+}
 
-  // Base half-width ~11.5% (~12% per spec); widens under suboptimal capture conditions.
+/**
+ * Shared bounded-range math: a true volume becomes a range whose half-width
+ * starts at ~11.5% and widens under suboptimal capture conditions.
+ * Always a range — never a single number.
+ */
+export function rangeFromVolume(
+  volumeMl: number,
+  lighting: LightingCondition,
+  tilted: boolean
+): RangeEstimate {
   let halfWidthFraction = 0.115;
-  if (input.lighting === 'dim') {
+  if (lighting === 'dim') {
     halfWidthFraction += 0.05;
   }
-  if (input.tilted) {
+  if (tilted) {
     halfWidthFraction += 0.06;
   }
 
-  const rawLow = clamped * (1 - halfWidthFraction);
-  const rawHigh = clamped * (1 + halfWidthFraction);
+  const rawLow = volumeMl * (1 - halfWidthFraction);
+  const rawHigh = volumeMl * (1 + halfWidthFraction);
 
   let lowMl = Math.max(50, Math.round(rawLow / 10) * 10);
   let highMl = Math.round(rawHigh / 10) * 10;
 
-  // Guarantee a strict range (never a single number)
   if (highMl <= lowMl) {
     highMl = lowMl + 20;
   }
 
   const midpointMl = Math.round((lowMl + highMl) / 2);
-  const stateId = classifyStateByMidpoint(midpointMl);
-  const state = ALERT_STATES[stateId];
-
   return {
     lowMl,
     highMl,
     midpointMl,
     spreadPct: Math.round(halfWidthFraction * 100),
     rangeLabel: `${formatMl(lowMl)}–${formatMl(highMl)} mL`,
+  };
+}
+
+/**
+ * Computes an illustrative TRIVENI blood-loss range from a simulated true volume
+ * and capture conditions. Always returns a range (never a single mL value).
+ */
+export function computeSimulation(input: SimulationInput): SimulationResult {
+  const clamped = Math.max(SIMULATOR_MIN_ML, Math.min(SIMULATOR_MAX_ML, input.trueVolumeMl));
+  const range = rangeFromVolume(clamped, input.lighting, input.tilted);
+  const stateId = classifyStateByMidpoint(range.midpointMl);
+  const state = ALERT_STATES[stateId];
+
+  return {
+    ...range,
     state,
     showChecklist: stateId !== 'BLUE',
   };
 }
+
+/* ------------------------------------------------------------------ */
+/* Per-pad + session layer (Field Simulator v2)                        */
+/* A single maternity pad saturates at roughly 300 mL. Real blood loss */
+/* accumulates across pads — the Clinical Ledger sums per-pad ranges.  */
+/* ------------------------------------------------------------------ */
+
+export const PAD_MIN_ML = 50;
+export const PAD_MAX_ML = 300;
+
+export function computePadEstimate(
+  padVolumeMl: number,
+  lighting: LightingCondition,
+  tilted: boolean
+): RangeEstimate {
+  const clamped = Math.max(PAD_MIN_ML, Math.min(PAD_MAX_ML, padVolumeMl));
+  return rangeFromVolume(clamped, lighting, tilted);
+}
+
+export interface SessionPad {
+  lowMl: number;
+  highMl: number;
+}
+
+export interface SessionSummary extends RangeEstimate {
+  state: AlertStateMeta;
+  showChecklist: boolean;
+  padCount: number;
+}
+
+const STATE_ORDER: AlertStateId[] = ['BLUE', 'AMBER', 'RED', 'DARK_RED'];
+
+export function summariseSession(
+  pads: SessionPad[],
+  vitalsAbnormal: boolean
+): SessionSummary | null {
+  if (pads.length === 0) return null;
+  const lowMl = pads.reduce((sum, p) => sum + p.lowMl, 0);
+  const highMl = pads.reduce((sum, p) => sum + p.highMl, 0);
+  const midpointMl = Math.round((lowMl + highMl) / 2);
+  let stateId = classifyStateByMidpoint(midpointMl);
+  // Shock-index override: abnormal vitals escalate one level regardless of volume.
+  if (vitalsAbnormal) {
+    const idx = STATE_ORDER.indexOf(stateId);
+    stateId = STATE_ORDER[Math.min(idx + 1, STATE_ORDER.length - 1)];
+  }
+  const state = ALERT_STATES[stateId];
+  return {
+    lowMl,
+    highMl,
+    midpointMl,
+    spreadPct: 0,
+    rangeLabel: `${formatMl(lowMl)}–${formatMl(highMl)} mL`,
+    state,
+    showChecklist: stateId !== 'BLUE',
+    padCount: pads.length,
+  };
+}
+
+export interface SessionPreset {
+  id: string;
+  label: string;
+  padVolumesMl: number[];
+  expectedState: AlertStateId;
+}
+
+export const SESSION_PRESETS: SessionPreset[] = [
+  { id: 'session-blue', label: '2 PADS · ~290 ML · BLUE', padVolumesMl: [170, 120], expectedState: 'BLUE' },
+  { id: 'session-amber', label: '3 PADS · ~430 ML · AMBER', padVolumesMl: [160, 150, 120], expectedState: 'AMBER' },
+  { id: 'session-red', label: '4 PADS · ~675 ML · RED', padVolumesMl: [190, 180, 160, 145], expectedState: 'RED' },
+  { id: 'session-darkred', label: '5 PADS · ~1,150 ML · DARK RED', padVolumesMl: [260, 240, 230, 220, 200], expectedState: 'DARK_RED' },
+];
 
 export const SIMULATOR_PRESETS: PresetScenario[] = [
   {
