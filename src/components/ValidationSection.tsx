@@ -95,7 +95,7 @@ export const ValidationSection: React.FC = () => {
               Status: Fixed · Not yet run
             </span>
           </div>
-          <dl className="divide-y divide-[#CFCAC0] min-w-[560px]">
+          <dl className="divide-y divide-[#CFCAC0]">
             {[
               ['Specimens', 'Synthetic blood simulant first, then goat/sheep blood in the VIT lab only. Maternity cotton pads across locally available brands. Period blood is never used — it is only ~36% blood and does not clot like postpartum loss.'],
               ['Volumes', '25–250 mL per pad in 25 mL steps, dispensed by volume and confirmed by weight.'],

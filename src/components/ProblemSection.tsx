@@ -119,7 +119,7 @@ export const ProblemSection: React.FC = () => {
         </div>
 
         {/* Simple flat SVG bar chart: Guessed vs Actual */}
-        <figure className="mt-8 border border-[#CFCAC0] bg-[#EAE6DC] p-5 sm:p-6">
+        <figure className="mt-8 border border-[#CFCAC0] bg-[#EAE6DC] p-5 sm:p-6 overflow-x-auto">
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-[#CFCAC0]">
             <span className="font-mono text-xs tracking-[0.1em] uppercase text-[#141716]">
               TYPICAL VISUAL UNDER-ESTIMATION AT PPH ONSET
@@ -131,7 +131,7 @@ export const ProblemSection: React.FC = () => {
 
           <svg
             viewBox="0 0 880 185"
-            className="w-full h-auto"
+            className="w-full h-auto min-w-[620px] sm:min-w-0"
             role="img"
             aria-label="Bar chart showing Guessed blood loss bar significantly shorter than Actual blood loss bar, with the gap labelled Visual Under-Estimation Zone"
           >

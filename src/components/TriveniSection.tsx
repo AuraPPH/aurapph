@@ -29,7 +29,7 @@ export const TriveniSection: React.FC = () => {
         </div>
 
         {/* Animated SVG Convergence Diagram */}
-        <figure className="border border-[#CFCAC0] bg-[#EAE6DC] p-4 sm:p-6 mb-8">
+        <figure className="border border-[#CFCAC0] bg-[#EAE6DC] p-4 sm:p-6 mb-8 overflow-x-auto">
           <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-[#CFCAC0]">
             <span className="font-mono text-xs tracking-[0.1em] uppercase text-[#141716]">
               CONVERGENCE PIPELINE — ZERO NEURAL WEIGHTS
@@ -41,7 +41,7 @@ export const TriveniSection: React.FC = () => {
 
           <svg
             viewBox="0 0 960 280"
-            className="w-full h-auto"
+            className="w-full h-auto min-w-[640px] sm:min-w-0"
             role="img"
             aria-label="Diagram showing three deterministic streams — OPTICS, AMOUNT, and CLINICAL LEDGER — converging into one output node labelled RANGE + STATE + ACTION"
           >

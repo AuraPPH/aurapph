@@ -15,7 +15,7 @@ export const PrivacySection: React.FC = () => {
   return (
     <section
       id="privacy"
-      className="dark-section py-16 sm:py-24 bg-[#0F1B1C] text-[#F4F2EC] border-b border-[#263638]"
+      className="dark-section py-16 sm:py-20 bg-[#0F1B1C] text-[#F4F2EC] border-b border-[#263638]"
       aria-labelledby="privacy-heading"
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
@@ -82,7 +82,7 @@ export const PrivacySection: React.FC = () => {
 
         {/* Evidence strip — the claim, shown */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 border border-[#263638]">
-          <div className="p-5 sm:p-6 border-b lg:border-b-0 lg:border-r border-[#263638] bg-[#091213]">
+          <div className="min-w-0 p-5 sm:p-6 border-b lg:border-b-0 lg:border-r border-[#263638] bg-[#091213]">
             <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#A6B4B2] mb-3">
               MANIFEST EXCERPT — THE PERMISSION THAT ISN&apos;T THERE
             </p>
@@ -103,7 +103,7 @@ export const PrivacySection: React.FC = () => {
               release.
             </p>
           </div>
-          <div className="p-5 sm:p-6">
+          <div className="min-w-0 p-5 sm:p-6">
             <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#A6B4B2] mb-3">
               DATA LIFECYCLE — WHERE EVERYTHING GOES
             </p>

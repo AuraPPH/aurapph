@@ -304,10 +304,10 @@ export default function App() {
                     Film — How a reading works
                   </span>
                   <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#525855]">
-                    80 sec · 16:9 · Sound on
+                    80 sec · Sound on
                   </span>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_420px]">
+                <div className="grid grid-cols-1 md:grid-cols-[400px_1fr]">
                   <div className="p-6 sm:p-8">
                     <p className="text-[15px] text-[#525855] leading-relaxed max-w-[52ch]">
                       The full flow, start to finish: lay the pad beside the card, capture the
@@ -341,7 +341,7 @@ export default function App() {
                   </div>
                   <div className="md:border-l border-t md:border-t-0 border-[#141716] bg-[#EAE6DC] flex items-center">
                     <video
-                      className="w-full aspect-video block"
+                      className="w-full block bg-[#141716]"
                       controls
                       preload="metadata"
                       playsInline

@@ -43,6 +43,8 @@ export const FieldSimulator: React.FC = () => {
 
   const displayState = session?.state ?? ALERT_STATES.BLUE;
   const showChecklist = session?.showChecklist ?? false;
+  const hiStyle: React.CSSProperties | undefined =
+    lang === 'hi' ? { fontFamily: 'var(--font-hindi)' } : undefined;
 
   const applyPreset = (presetId: string, volumes: number[]) => {
     setSessionPads(volumes.map((v) => computePadEstimate(v, 'daylight', false)));
@@ -104,13 +106,18 @@ export const FieldSimulator: React.FC = () => {
         </div>
 
         {/* Grid: Output stacks ABOVE controls on mobile (< 768px), sits RIGHT of controls on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Controls Column (bottom on mobile, left on desktop) */}
-          <div className="order-2 md:order-1 md:col-span-7 border border-[#CFCAC0] bg-[#F4F2EC]">
+          <div className="order-2 md:order-1 md:col-span-7 border border-[#CFCAC0] bg-[#F4F2EC] h-full flex flex-col">
             {/* Session Presets */}
             <div className="p-5 sm:p-6 border-b border-[#CFCAC0]">
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3">
-                SESSION PRESETS (DAYLIGHT · FLAT CAPTURE · VITALS NORMAL)
+              <p
+                className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? 'SESSION PRESETS (DAYLIGHT · FLAT CAPTURE · VITALS NORMAL)'
+                  : 'सेशन प्रीसेट (दिन की रोशनी · समतल कैप्चर · जीवन-चिह्न सामान्य)'}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {SESSION_PRESETS.map((preset) => {
@@ -128,7 +135,15 @@ export const FieldSimulator: React.FC = () => {
                           : 'border-[#CFCAC0] bg-[#EAE6DC] text-[#141716] hover:border-[#141716]'
                       }`}
                     >
-                      <span className="tabular-nums">{preset.label}</span>
+                      <span className="tabular-nums" style={hiStyle}>
+                        {lang === 'en'
+                          ? preset.label
+                          : `${preset.padVolumesMl.length} पैड · ~${preset.padVolumesMl
+                              .reduce((a, b) => a + b, 0)
+                              .toLocaleString('en-IN')} ML · ${
+                              ALERT_STATES[preset.expectedState].labelHi
+                            }`}
+                      </span>
                       <span
                         className="w-3 h-3 shrink-0 border border-[#141716]/30"
                         style={{ backgroundColor: stateMeta.colorHex }}
@@ -146,8 +161,11 @@ export const FieldSimulator: React.FC = () => {
                 <label
                   htmlFor="sim-volume-slider"
                   className="font-mono text-xs tracking-[0.08em] uppercase text-[#141716] font-medium"
+                  style={hiStyle}
                 >
-                  Blood on this pad (simulated input)
+                  {lang === 'en'
+                    ? 'Blood on this pad (simulated input)'
+                    : 'इस पैड पर रक्त (कल्पित इनपुट)'}
                 </label>
                 <span
                   data-testid="sim-input-volume"
@@ -169,19 +187,26 @@ export const FieldSimulator: React.FC = () => {
               <div className="flex justify-between font-mono text-[11px] text-[#525855] tabular-nums mt-1">
                 <span>50 mL</span>
                 <span>150</span>
-                <span>300 mL — PAD SATURATED</span>
+                <span style={hiStyle}>
+                  {lang === 'en' ? '300 mL — PAD SATURATED' : '300 mL — पैड पूर्ण संतृप्त'}
+                </span>
               </div>
-              <p className="mt-3 text-sm text-[#525855] leading-relaxed">
-                One maternity pad physically saturates at ≈300 mL. Anything beyond that is a second
-                pad — which is exactly why the Clinical Ledger, not a single photo, carries the
-                session total.
+              <p className="mt-3 text-sm text-[#525855] leading-relaxed" style={hiStyle}>
+                {lang === 'en'
+                  ? 'One maternity pad physically saturates at ≈300 mL. Anything beyond that is a second pad — which is exactly why the Clinical Ledger, not a single photo, carries the session total.'
+                  : 'एक प्रसूति पैड लगभग 300 mL पर पूर्णतः संतृप्त हो जाता है। इससे अधिक हो तो वह दूसरा पैड है — यही कारण है कि सेशन का कुल योग किसी एक फ़ोटो से नहीं, क्लिनिकल लेज़र से तय होता है।'}
               </p>
             </div>
 
             {/* Condition Toggle Chips */}
             <div className="p-5 sm:p-6 border-b border-[#CFCAC0]">
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3">
-                CAPTURE CONDITION (WIDENS BOUNDED UNCERTAINTY)
+              <p
+                className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? 'CAPTURE CONDITION (WIDENS BOUNDED UNCERTAINTY)'
+                  : 'कैप्चर स्थिति (सीमाबद्ध अनिश्चितता बढ़ाती है)'}
               </p>
               <div className="flex flex-wrap gap-2.5" role="group" aria-label="Capture conditions">
                 <button
@@ -194,7 +219,7 @@ export const FieldSimulator: React.FC = () => {
                       : 'border-[#CFCAC0] bg-[#F4F2EC] text-[#141716] hover:border-[#141716]'
                   }`}
                 >
-                  Daylight
+                  <span style={hiStyle}>{lang === 'en' ? 'Daylight' : 'दिन की रोशनी'}</span>
                 </button>
                 <button
                   type="button"
@@ -206,7 +231,8 @@ export const FieldSimulator: React.FC = () => {
                       : 'border-[#CFCAC0] bg-[#F4F2EC] text-[#141716] hover:border-[#141716]'
                   }`}
                 >
-                  Dim Room {lighting === 'dim' ? '(+5%)' : ''}
+                  <span style={hiStyle}>{lang === 'en' ? 'Dim Room' : 'मद्धम रोशनी'}</span>{' '}
+                  {lighting === 'dim' ? '(+5%)' : ''}
                 </button>
                 <button
                   type="button"
@@ -218,19 +244,29 @@ export const FieldSimulator: React.FC = () => {
                       : 'border-[#CFCAC0] bg-[#F4F2EC] text-[#141716] hover:border-[#141716]'
                   }`}
                 >
-                  Tilted Capture {tilted ? '(+6%)' : ''}
+                  <span style={hiStyle}>{lang === 'en' ? 'Tilted Capture' : 'तिरछा कैप्चर'}</span>{' '}
+                  {tilted ? '(+6%)' : ''}
                 </button>
               </div>
-              <p className="mt-3 font-mono text-[11px] text-[#525855] tabular-nums">
-                THIS PAD — CURRENT HALF-WIDTH SPREAD: ±{padEstimate.spreadPct}% · MIDPOINT:{' '}
-                {formatMl(padEstimate.midpointMl)} mL
+              <p
+                className="mt-3 font-mono text-[11px] text-[#525855] tabular-nums"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? `THIS PAD — CURRENT HALF-WIDTH SPREAD: ±${padEstimate.spreadPct}% · MIDPOINT: ${formatMl(padEstimate.midpointMl)} ML`
+                  : `यह पैड — वर्तमान अर्ध-विस्तार: ±${padEstimate.spreadPct}% · मध्यबिंदु: ${formatMl(padEstimate.midpointMl)} ML`}
               </p>
             </div>
 
             {/* Vitals Override */}
             <div className="p-5 sm:p-6 border-b border-[#CFCAC0]">
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3">
-                MATERNAL VITALS (STREAM 03 OVERRIDE)
+              <p
+                className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? 'MATERNAL VITALS (STREAM 03 OVERRIDE)'
+                  : 'मातृ जीवन-चिह्न (स्ट्रीम 03 ओवरराइड)'}
               </p>
               <button
                 type="button"
@@ -242,18 +278,35 @@ export const FieldSimulator: React.FC = () => {
                     : 'border-[#CFCAC0] bg-[#F4F2EC] text-[#141716] hover:border-[#141716]'
                 }`}
               >
-                Abnormal vitals — HR ≥ 110 · SBP &lt; 90 {vitalsAbnormal ? '(OVERRIDE ACTIVE)' : ''}
+                <span style={hiStyle}>
+                  {lang === 'en'
+                    ? 'Abnormal vitals — HR ≥ 110 · SBP < 90'
+                    : 'असामान्य जीवन-चिह्न — HR ≥ 110 · SBP < 90'}
+                </span>{' '}
+                <span style={hiStyle}>
+                  {vitalsAbnormal
+                    ? lang === 'en'
+                      ? '(OVERRIDE ACTIVE)'
+                      : '(ओवरराइड सक्रिय)'
+                    : ''}
+                </span>
               </button>
-              <p className="mt-3 text-sm text-[#525855] leading-relaxed">
-                Shock-index signs escalate the session one full state, whatever the pads show.
-                Escalation is sticky — it never steps back down on its own.
+              <p className="mt-3 text-sm text-[#525855] leading-relaxed" style={hiStyle}>
+                {lang === 'en'
+                  ? 'Shock-index signs escalate the session one full state, whatever the pads show. Escalation is sticky — it never steps back down on its own.'
+                  : 'शॉक-इंडेक्स के संकेत, पैड कुछ भी दिखाएँ, सेशन को एक पूरी अवस्था ऊपर ले जाते हैं। वृद्धि स्थायी है — यह अपने आप नीचे नहीं आती।'}
               </p>
             </div>
 
             {/* State Threshold Reference Ledger */}
-            <div className="p-5 sm:p-6 bg-[#EAE6DC]">
-              <p className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3">
-                FOUR-STATE SPECIFICATION — SESSION CUMULATIVE (NO GREEN STATE)
+            <div className="p-5 sm:p-6 bg-[#EAE6DC] flex-1">
+              <p
+                className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#525855] mb-3"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? 'FOUR-STATE SPECIFICATION — SESSION CUMULATIVE (NO GREEN STATE)'
+                  : 'चार-अवस्था विनिर्देश — सेशन संचयी (कोई हरी अवस्था नहीं)'}
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#CFCAC0]">
                 {(['BLUE', 'AMBER', 'RED', 'DARK_RED'] as const).map((id) => {
@@ -268,24 +321,31 @@ export const FieldSimulator: React.FC = () => {
                     >
                       <span
                         className="inline-block font-mono text-[10px] font-semibold tracking-[0.08em] px-1.5 py-0.5"
-                        style={{ backgroundColor: s.colorHex, color: s.textColorHex }}
+                        style={{
+                          backgroundColor: s.colorHex,
+                          color: s.textColorHex,
+                          ...(lang === 'hi' ? { fontFamily: 'var(--font-hindi)' } : {}),
+                        }}
                       >
-                        {s.labelEn}
+                        {lang === 'en' ? s.labelEn : s.labelHi}
                       </span>
                       <p className="font-mono text-xs text-[#141716] mt-2 tabular-nums">
                         {s.thresholdRule}
                       </p>
-                      <p className="text-[11px] text-[#525855] mt-1.5 leading-snug">
-                        {s.sublineEn}
+                      <p className="text-[11px] text-[#525855] mt-1.5 leading-snug" style={hiStyle}>
+                        {lang === 'en' ? s.sublineEn : s.sublineHi}
                       </p>
                     </div>
                   );
                 })}
               </div>
-              <p className="mt-3 font-mono text-[11px] text-[#525855] leading-relaxed">
-                RULE SOURCE: WHO PPH THRESHOLDS APPLIED TO THE CUMULATIVE LEDGER — MEASURED
-                PATHWAY ACTS AT 300 ML + ABNORMAL VITALS; THE PHOTO PATHWAY NEVER CLAIMS A
-                THRESHOLD CROSSED ON ITS OWN.
+              <p
+                className="mt-3 font-mono text-[11px] text-[#525855] leading-relaxed"
+                style={hiStyle}
+              >
+                {lang === 'en'
+                  ? 'RULE SOURCE: WHO PPH THRESHOLDS APPLIED TO THE CUMULATIVE LEDGER — MEASURED PATHWAY ACTS AT 300 ML + ABNORMAL VITALS; THE PHOTO PATHWAY NEVER CLAIMS A THRESHOLD CROSSED ON ITS OWN.'
+                  : 'नियम स्रोत: WHO PPH सीमाएँ संचयी लेज़र पर लागू — मापित मार्ग 300 ML + असामान्य जीवन-चिह्नों पर कार्य करता है; फ़ोटो मार्ग अपने आप किसी सीमा के पार होने का दावा कभी नहीं करता।'}
               </p>
             </div>
           </div>
@@ -364,9 +424,13 @@ export const FieldSimulator: React.FC = () => {
                     ? `+ Log this pad — Pad ${sessionPads.length + 1}`
                     : `+ यह पैड दर्ज करें — पैड ${sessionPads.length + 1}`}
                 </button>
-                <p className="mt-2 font-mono text-[10px] tracking-[0.06em] uppercase text-[#525855]">
-                  CONDITIONS: {lighting === 'daylight' ? 'DAYLIGHT' : 'DIM ROOM'} ·{' '}
-                  {tilted ? 'TILTED CAPTURE' : 'FLAT CAPTURE'}
+                <p
+                  className="mt-2 font-mono text-[10px] tracking-[0.06em] uppercase text-[#525855]"
+                  style={hiStyle}
+                >
+                  {lang === 'en'
+                    ? `CONDITIONS: ${lighting === 'daylight' ? 'DAYLIGHT' : 'DIM ROOM'} · ${tilted ? 'TILTED CAPTURE' : 'FLAT CAPTURE'}`
+                    : `स्थिति: ${lighting === 'daylight' ? 'दिन की रोशनी' : 'मद्धम रोशनी'} · ${tilted ? 'तिरछा कैप्चर' : 'समतल कैप्चर'}`}
                 </p>
               </div>
 
@@ -384,7 +448,7 @@ export const FieldSimulator: React.FC = () => {
                       onClick={resetSession}
                       className="font-mono text-[10px] tracking-[0.08em] uppercase text-[#525855] underline underline-offset-2 cursor-pointer"
                     >
-                      {lang === 'en' ? 'Reset' : 'रीसेट'}
+                      {lang === 'en' ? 'Reset ledger' : 'लेज़र रीसेट'}
                     </button>
                   )}
                 </div>

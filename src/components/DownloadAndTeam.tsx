@@ -26,7 +26,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
       {/* 11 — DOWNLOAD / APK ROADMAP */}
       <section
         id="download"
-        className="py-16 sm:py-20 border-b border-[#CFCAC0]"
+        className="py-14 sm:py-16 border-b border-[#CFCAC0]"
         aria-labelledby="download-heading"
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
@@ -110,7 +110,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
       {/* 12 — TEAM */}
       <section
         id="team"
-        className="py-16 sm:py-20 border-b border-[#CFCAC0]"
+        className="py-14 sm:py-16 border-b border-[#CFCAC0]"
         aria-labelledby="team-heading"
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
@@ -157,7 +157,7 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
       </section>
 
       {/* 12 — FOOTER */}
-      <footer className="py-12 sm:py-16 bg-[#F4F2EC]">
+      <footer className="py-10 sm:py-12 bg-[#F4F2EC]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-[#CFCAC0]">
             <div className="md:col-span-5">
@@ -177,8 +177,26 @@ export const DownloadAndTeam: React.FC<DownloadAndTeamProps> = ({ onShowApkToast
                 PUBLISHED SOURCES
               </p>
               <ul className="space-y-1.5 text-sm text-[#141716]">
-                <li>WHO PPH fact sheet</li>
-                <li>E-MOTIVE trial, NEJM 2023</li>
+                <li>
+                  <a
+                    href="https://www.who.int/news-room/fact-sheets/detail/maternal-mortality"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2 hover:text-[#B81D24]"
+                  >
+                    WHO fact sheet — maternal mortality
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://doi.org/10.1056/NEJMoa2303966"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2 hover:text-[#B81D24]"
+                  >
+                    E-MOTIVE trial, NEJM 2023
+                  </a>
+                </li>
                 <li>SRS 2020–22 MMR bulletin</li>
               </ul>
             </div>

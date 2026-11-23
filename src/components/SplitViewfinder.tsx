@@ -205,7 +205,10 @@ export const SplitViewfinder: React.FC = () => {
           </svg>
 
           {/* Right side label (sm+ overlay; mobile uses dedicated strip above) */}
-          <div className="hidden sm:block absolute top-4 right-4 bg-[#F4F2EC] border border-[#141716] px-3 py-2">
+          <div
+            className="hidden sm:block absolute top-4 right-4 bg-[#F4F2EC] border border-[#141716] px-3 py-2 transition-opacity duration-200"
+            style={{ opacity: dividerPct > 72 ? 0 : 1 }}
+          >
             <div className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.06em] text-[#141716] tabular-nums">
                 TRIVENI RANGE 550–680 mL
@@ -253,7 +256,10 @@ export const SplitViewfinder: React.FC = () => {
           </svg>
 
           {/* Left side label (sm+ overlay; mobile uses dedicated strip above) */}
-          <div className="hidden sm:block absolute top-4 left-4 bg-[#F4F2EC] border border-[#CFCAC0] px-3 py-2">
+          <div
+            className="hidden sm:block absolute top-4 left-4 bg-[#F4F2EC] border border-[#CFCAC0] px-3 py-2 transition-opacity duration-200"
+            style={{ opacity: dividerPct < 26 ? 0 : 1 }}
+          >
             <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.06em] text-[#141716] tabular-nums block">
               VISUAL GUESS ≈ 320 mL
             </span>

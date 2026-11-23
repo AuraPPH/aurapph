@@ -37,6 +37,10 @@
     overflow-x: hidden;
   }
 
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
   h1, h2, h3 {
     text-wrap: balance;
   }
