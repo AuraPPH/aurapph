@@ -124,22 +124,25 @@ export const ValidationSection: React.FC = () => {
               The calibration card is a physical artifact — print it and check us.
             </h3>
             <p className="mt-3 text-sm text-[#525855] leading-relaxed">
-              Every measurement stands on this card: corner fiducials for scale, a greyscale ramp
-              for white balance, a true-millimetre ruler to catch print scaling. Print at 100%,
-              laminate matte, and verify the ruler before trusting a single reading.
+              Every measurement stands on this card: four coded ArUco markers the app verifies by
+              ID for scale and perspective, six neutral patches with named values for white
+              balance, and a 100 mm check line — the card counts only if that line measures
+              100 ± 1 mm in both axes after printing. The red-brown patches are diagnostics only,
+              never a blood standard. Print at 100%, laminate matte, and check the line before
+              trusting a single reading.
             </p>
             <a
               href="/src/assets/calibration-card.svg"
-              download="aurapph-calibration-card-v1.svg"
+              download="aurapph-calibration-card-v2.svg"
               className="mt-5 inline-flex min-h-[44px] px-5 items-center border border-[#141716] bg-[#141716] text-[#F4F2EC] hover:bg-[#B81D24] hover:border-[#B81D24] font-mono text-xs font-semibold tracking-[0.08em] uppercase transition-colors"
             >
-              Download the card (SVG · 100 × 70 mm)
+              Download the card (SVG · 148 × 105 mm)
             </a>
           </div>
           <div className="bg-[#EAE6DC] border-t md:border-t-0 md:border-l border-[#141716] flex items-center justify-center p-6">
             <img
               src="/src/assets/calibration-card.svg"
-              alt="AuraPPH calibration card v1 — corner fiducials, greyscale ramp and millimetre ruler"
+              alt="AuraPPH calibration card v2 — ArUco coded corner markers, neutral reference patches, diagnostic patches and millimetre rulers"
               className="w-full max-w-[420px] h-auto border border-[#CFCAC0]"
             />
           </div>

@@ -373,8 +373,8 @@ export default function App() {
                     Place the printed reference card beside the pad.
                   </h3>
                   <p className="mt-3 text-sm text-[#525855] leading-relaxed">
-                    A laminated black-and-greyscale calibration card sets exact millimeter scale and
-                    ambient white balance with zero special hardware.
+                    A laminated calibration card with coded corner markers sets exact millimetre
+                    scale and checks the light — with zero special hardware.
                   </p>
                 </div>
 
